@@ -30,6 +30,7 @@
         {
             this.USBFound = new System.Windows.Forms.Label();
             this.searchHidButton = new System.Windows.Forms.Button();
+            this.sendOutputReportButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // USBFound
@@ -51,9 +52,20 @@
             this.searchHidButton.UseVisualStyleBackColor = true;
             this.searchHidButton.Click += new System.EventHandler(this.searchHidButton_Click);
             // 
+            // sendOutputReportButton
+            // 
+            this.sendOutputReportButton.Location = new System.Drawing.Point(39, 139);
+            this.sendOutputReportButton.Name = "sendOutputReportButton";
+            this.sendOutputReportButton.Size = new System.Drawing.Size(181, 29);
+            this.sendOutputReportButton.TabIndex = 2;
+            this.sendOutputReportButton.Text = "Send Output Report";
+            this.sendOutputReportButton.UseVisualStyleBackColor = true;
+            this.sendOutputReportButton.Click += new System.EventHandler(this.sendOutputReportButton_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Controls.Add(this.sendOutputReportButton);
             this.Controls.Add(this.searchHidButton);
             this.Controls.Add(this.USBFound);
             this.Name = "Form1";
@@ -66,5 +78,6 @@
 
         private Label USBFound;
         private Button searchHidButton;
+        private Button sendOutputReportButton;
     }
 }

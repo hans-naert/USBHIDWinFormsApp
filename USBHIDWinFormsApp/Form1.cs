@@ -1,6 +1,7 @@
 using Windows.Devices.Enumeration;
 using Windows.Devices.HumanInterfaceDevice;
 using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace USBHIDWinFormsApp
 {
@@ -49,6 +50,31 @@ namespace USBHIDWinFormsApp
         private void searchHidButton_Click(object sender, EventArgs e)
         {
             enumerateHidDevices();
+        }
+
+        private async void sendOutputReportAsync(byte reportId, byte firstByte)
+        {
+            var outputReport = device.CreateOutputReport(reportId);
+
+            var dataWriter = new DataWriter();
+
+            // First byte is always the report id
+            dataWriter.WriteByte((Byte)outputReport.Id);
+            dataWriter.WriteByte(firstByte);
+            //dataWriter.WriteBytes(new byte[63]);
+
+            outputReport.Data = dataWriter.DetachBuffer();
+
+            uint bytesWritten = await device.SendOutputReportAsync(outputReport);
+        }
+
+
+        byte toggle = 0x0;
+
+        private void sendOutputReportButton_Click(object sender, EventArgs e)
+        {
+            toggle = (byte)~toggle;
+            sendOutputReportAsync(0x00, toggle);
         }
     }
 }
