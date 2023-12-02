@@ -1,5 +1,8 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Enumeration;
 using Windows.Devices.HumanInterfaceDevice;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Streams;
 
@@ -33,6 +36,7 @@ namespace USBHIDWinFormsApp
                 // So we can send/receive HID reports from it or 
                 // query it for control descriptions
                 USBFound.Text = "device found";
+                registerForEvents();
             }
             else
             {
@@ -55,16 +59,9 @@ namespace USBHIDWinFormsApp
         private async void sendOutputReportAsync(byte reportId, byte firstByte)
         {
             var outputReport = device.CreateOutputReport(reportId);
-
-            var dataWriter = new DataWriter();
-
-            // First byte is always the report id
-            dataWriter.WriteByte((Byte)outputReport.Id);
-            dataWriter.WriteByte(firstByte);
-            //dataWriter.WriteBytes(new byte[63]);
-
-            outputReport.Data = dataWriter.DetachBuffer();
-
+            byte[] data = [reportId, firstByte];           
+            outputReport.Data = data.AsBuffer();
+            Debug.WriteLine("Sending output report");
             uint bytesWritten = await device.SendOutputReportAsync(outputReport);
         }
 
@@ -79,21 +76,31 @@ namespace USBHIDWinFormsApp
 
         private async void getNumericInputReportAsync()
         {
-            var inputReport = await device.GetInputReportAsync(0x0);
-
-            var data = inputReport.Data;
-
-            var dataReader = DataReader.FromBuffer(data);
-
-            byte[] bytesRead = new byte[2];
-            dataReader.ReadBytes(bytesRead);
+            var inputReport = await device.GetInputReportAsync(0x0);            
+            byte[] bytesRead = inputReport.Data.ToArray();
             inputReportTextBox.Text = $"[0x{bytesRead[0].ToString("X2")}, 0x{bytesRead[1].ToString("X2")}]";
         }
-
 
         private void getInputReportButton_Click(object sender, EventArgs e)
         {
             getNumericInputReportAsync();
+        }
+
+        private void Device_InputReportReceived(object sender, HidInputReportReceivedEventArgs e)
+        {
+            Debug.WriteLine("Input report received");
+            Debug.WriteLine(e.Report.Data.ToArray());
+        }   
+
+        private void registerForEvents()
+        {
+            device.InputReportReceived += (sender, e) =>
+            {
+                Debug.WriteLine("Input report received");
+                var data = e.Report.Data.ToArray();
+                this.Invoke(new Action(() => inputReportEventCheckBox.Checked = (data[1] == 0x01))); 
+                Debug.WriteLine(String.Join(" ",(Array.ConvertAll(data,b => "0x"+b.ToString("X2")))));
+            };
         }
     }
 }

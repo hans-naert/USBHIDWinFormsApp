@@ -33,6 +33,7 @@
             sendOutputReportButton = new Button();
             button1 = new Button();
             inputReportTextBox = new TextBox();
+            inputReportEventCheckBox = new CheckBox();
             SuspendLayout();
             // 
             // USBFound
@@ -46,7 +47,7 @@
             // 
             // searchHidButton
             // 
-            searchHidButton.Location = new Point(35, 72);
+            searchHidButton.Location = new Point(35, 71);
             searchHidButton.Name = "searchHidButton";
             searchHidButton.Size = new Size(94, 29);
             searchHidButton.TabIndex = 1;
@@ -56,7 +57,7 @@
             // 
             // sendOutputReportButton
             // 
-            sendOutputReportButton.Location = new Point(33, 124);
+            sendOutputReportButton.Location = new Point(33, 122);
             sendOutputReportButton.Name = "sendOutputReportButton";
             sendOutputReportButton.Size = new Size(181, 29);
             sendOutputReportButton.TabIndex = 2;
@@ -66,7 +67,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(35, 176);
+            button1.Location = new Point(35, 173);
             button1.Name = "button1";
             button1.Size = new Size(181, 29);
             button1.TabIndex = 2;
@@ -76,15 +77,27 @@
             // 
             // inputReportTextBox
             // 
-            inputReportTextBox.Location = new Point(35, 228);
+            inputReportTextBox.Location = new Point(35, 224);
             inputReportTextBox.Name = "inputReportTextBox";
             inputReportTextBox.ReadOnly = true;
             inputReportTextBox.Size = new Size(125, 27);
             inputReportTextBox.TabIndex = 3;
             // 
+            // inputReportEventCheckBox
+            // 
+            inputReportEventCheckBox.AutoSize = true;
+            inputReportEventCheckBox.Enabled = false;
+            inputReportEventCheckBox.Location = new Point(38, 273);
+            inputReportEventCheckBox.Name = "inputReportEventCheckBox";
+            inputReportEventCheckBox.Size = new Size(75, 24);
+            inputReportEventCheckBox.TabIndex = 4;
+            inputReportEventCheckBox.Text = "Button";
+            inputReportEventCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             ClientSize = new Size(347, 307);
+            Controls.Add(inputReportEventCheckBox);
             Controls.Add(inputReportTextBox);
             Controls.Add(button1);
             Controls.Add(sendOutputReportButton);
@@ -103,5 +116,6 @@
         private Button sendOutputReportButton;
         private Button button1;
         private TextBox inputReportTextBox;
+        private CheckBox inputReportEventCheckBox;
     }
 }
