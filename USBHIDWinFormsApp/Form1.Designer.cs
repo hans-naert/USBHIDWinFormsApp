@@ -28,50 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.USBFound = new System.Windows.Forms.Label();
-            this.searchHidButton = new System.Windows.Forms.Button();
-            this.sendOutputReportButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            USBFound = new Label();
+            searchHidButton = new Button();
+            sendOutputReportButton = new Button();
+            button1 = new Button();
+            inputReportTextBox = new TextBox();
+            SuspendLayout();
             // 
             // USBFound
             // 
-            this.USBFound.AutoSize = true;
-            this.USBFound.Location = new System.Drawing.Point(39, 46);
-            this.USBFound.Name = "USBFound";
-            this.USBFound.Size = new System.Drawing.Size(139, 20);
-            this.USBFound.TabIndex = 0;
-            this.USBFound.Text = "Click on Search HID";
+            USBFound.AutoSize = true;
+            USBFound.Location = new Point(33, 29);
+            USBFound.Name = "USBFound";
+            USBFound.Size = new Size(139, 20);
+            USBFound.TabIndex = 0;
+            USBFound.Text = "Click on Search HID";
             // 
             // searchHidButton
             // 
-            this.searchHidButton.Location = new System.Drawing.Point(41, 88);
-            this.searchHidButton.Name = "searchHidButton";
-            this.searchHidButton.Size = new System.Drawing.Size(94, 29);
-            this.searchHidButton.TabIndex = 1;
-            this.searchHidButton.Text = "Search HID";
-            this.searchHidButton.UseVisualStyleBackColor = true;
-            this.searchHidButton.Click += new System.EventHandler(this.searchHidButton_Click);
+            searchHidButton.Location = new Point(35, 72);
+            searchHidButton.Name = "searchHidButton";
+            searchHidButton.Size = new Size(94, 29);
+            searchHidButton.TabIndex = 1;
+            searchHidButton.Text = "Search HID";
+            searchHidButton.UseVisualStyleBackColor = true;
+            searchHidButton.Click += searchHidButton_Click;
             // 
             // sendOutputReportButton
             // 
-            this.sendOutputReportButton.Location = new System.Drawing.Point(39, 139);
-            this.sendOutputReportButton.Name = "sendOutputReportButton";
-            this.sendOutputReportButton.Size = new System.Drawing.Size(181, 29);
-            this.sendOutputReportButton.TabIndex = 2;
-            this.sendOutputReportButton.Text = "Send Output Report";
-            this.sendOutputReportButton.UseVisualStyleBackColor = true;
-            this.sendOutputReportButton.Click += new System.EventHandler(this.sendOutputReportButton_Click);
+            sendOutputReportButton.Location = new Point(33, 124);
+            sendOutputReportButton.Name = "sendOutputReportButton";
+            sendOutputReportButton.Size = new Size(181, 29);
+            sendOutputReportButton.TabIndex = 2;
+            sendOutputReportButton.Text = "Send Output Report";
+            sendOutputReportButton.UseVisualStyleBackColor = true;
+            sendOutputReportButton.Click += sendOutputReportButton_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(35, 176);
+            button1.Name = "button1";
+            button1.Size = new Size(181, 29);
+            button1.TabIndex = 2;
+            button1.Text = "Get Input Report";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += getInputReportButton_Click;
+            // 
+            // inputReportTextBox
+            // 
+            inputReportTextBox.Location = new Point(35, 228);
+            inputReportTextBox.Name = "inputReportTextBox";
+            inputReportTextBox.ReadOnly = true;
+            inputReportTextBox.Size = new Size(125, 27);
+            inputReportTextBox.TabIndex = 3;
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
-            this.Controls.Add(this.sendOutputReportButton);
-            this.Controls.Add(this.searchHidButton);
-            this.Controls.Add(this.USBFound);
-            this.Name = "Form1";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            ClientSize = new Size(347, 307);
+            Controls.Add(inputReportTextBox);
+            Controls.Add(button1);
+            Controls.Add(sendOutputReportButton);
+            Controls.Add(searchHidButton);
+            Controls.Add(USBFound);
+            Name = "Form1";
+            Text = "HID - Windows Forms";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -79,5 +101,7 @@
         private Label USBFound;
         private Button searchHidButton;
         private Button sendOutputReportButton;
+        private Button button1;
+        private TextBox inputReportTextBox;
     }
 }

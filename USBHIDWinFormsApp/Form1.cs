@@ -46,7 +46,7 @@ namespace USBHIDWinFormsApp
             InitializeComponent();
         }
 
-   
+
         private void searchHidButton_Click(object sender, EventArgs e)
         {
             enumerateHidDevices();
@@ -75,6 +75,25 @@ namespace USBHIDWinFormsApp
         {
             toggle = (byte)~toggle;
             sendOutputReportAsync(0x00, toggle);
+        }
+
+        private async void getNumericInputReportAsync()
+        {
+            var inputReport = await device.GetInputReportAsync(0x0);
+
+            var data = inputReport.Data;
+
+            var dataReader = DataReader.FromBuffer(data);
+
+            byte[] bytesRead = new byte[2];
+            dataReader.ReadBytes(bytesRead);
+            inputReportTextBox.Text = $"[0x{bytesRead[0].ToString("X2")}, 0x{bytesRead[1].ToString("X2")}]";
+        }
+
+
+        private void getInputReportButton_Click(object sender, EventArgs e)
+        {
+            getNumericInputReportAsync();
         }
     }
 }
