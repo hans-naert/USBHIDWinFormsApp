@@ -34,6 +34,7 @@
             button1 = new Button();
             inputReportTextBox = new TextBox();
             inputReportEventCheckBox = new CheckBox();
+            button2 = new Button();
             SuspendLayout();
             // 
             // USBFound
@@ -41,13 +42,13 @@
             USBFound.AutoSize = true;
             USBFound.Location = new Point(33, 29);
             USBFound.Name = "USBFound";
-            USBFound.Size = new Size(139, 20);
+            USBFound.Size = new Size(111, 15);
             USBFound.TabIndex = 0;
             USBFound.Text = "Click on Search HID";
             // 
             // searchHidButton
             // 
-            searchHidButton.Location = new Point(35, 71);
+            searchHidButton.Location = new Point(33, 59);
             searchHidButton.Name = "searchHidButton";
             searchHidButton.Size = new Size(94, 29);
             searchHidButton.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             // sendOutputReportButton
             // 
-            sendOutputReportButton.Location = new Point(33, 122);
+            sendOutputReportButton.Location = new Point(33, 103);
             sendOutputReportButton.Name = "sendOutputReportButton";
             sendOutputReportButton.Size = new Size(181, 29);
             sendOutputReportButton.TabIndex = 2;
@@ -67,7 +68,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(35, 173);
+            button1.Location = new Point(33, 191);
             button1.Name = "button1";
             button1.Size = new Size(181, 29);
             button1.TabIndex = 2;
@@ -77,22 +78,32 @@
             // 
             // inputReportTextBox
             // 
-            inputReportTextBox.Location = new Point(35, 224);
+            inputReportTextBox.Location = new Point(33, 235);
             inputReportTextBox.Name = "inputReportTextBox";
             inputReportTextBox.ReadOnly = true;
-            inputReportTextBox.Size = new Size(125, 27);
+            inputReportTextBox.Size = new Size(125, 23);
             inputReportTextBox.TabIndex = 3;
             // 
             // inputReportEventCheckBox
             // 
             inputReportEventCheckBox.AutoSize = true;
             inputReportEventCheckBox.Enabled = false;
-            inputReportEventCheckBox.Location = new Point(38, 273);
+            inputReportEventCheckBox.Location = new Point(33, 273);
             inputReportEventCheckBox.Name = "inputReportEventCheckBox";
-            inputReportEventCheckBox.Size = new Size(75, 24);
+            inputReportEventCheckBox.Size = new Size(62, 19);
             inputReportEventCheckBox.TabIndex = 4;
             inputReportEventCheckBox.Text = "Button";
             inputReportEventCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(33, 147);
+            button2.Name = "button2";
+            button2.Size = new Size(181, 29);
+            button2.TabIndex = 2;
+            button2.Text = "Send Output 64 Report";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += sendOutputReportButton64_Click;
             // 
             // Form1
             // 
@@ -100,6 +111,7 @@
             Controls.Add(inputReportEventCheckBox);
             Controls.Add(inputReportTextBox);
             Controls.Add(button1);
+            Controls.Add(button2);
             Controls.Add(sendOutputReportButton);
             Controls.Add(searchHidButton);
             Controls.Add(USBFound);
@@ -117,5 +129,6 @@
         private Button button1;
         private TextBox inputReportTextBox;
         private CheckBox inputReportEventCheckBox;
+        private Button button2;
     }
 }

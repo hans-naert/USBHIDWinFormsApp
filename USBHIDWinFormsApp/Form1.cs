@@ -2,9 +2,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Enumeration;
 using Windows.Devices.HumanInterfaceDevice;
-using Windows.Foundation;
 using Windows.Storage;
-using Windows.Storage.Streams;
 
 namespace USBHIDWinFormsApp
 {
@@ -59,7 +57,7 @@ namespace USBHIDWinFormsApp
         private async void sendOutputReportAsync(byte reportId, byte firstByte)
         {
             var outputReport = device.CreateOutputReport(reportId);
-            byte[] data = [reportId, firstByte];           
+            byte[] data = [reportId, firstByte];
             outputReport.Data = data.AsBuffer();
             Debug.WriteLine("Sending output report");
             uint bytesWritten = await device.SendOutputReportAsync(outputReport);
@@ -76,7 +74,7 @@ namespace USBHIDWinFormsApp
 
         private async void getNumericInputReportAsync()
         {
-            var inputReport = await device.GetInputReportAsync(0x0);            
+            var inputReport = await device.GetInputReportAsync(0x0);
             byte[] bytesRead = inputReport.Data.ToArray();
             inputReportTextBox.Text = $"[0x{bytesRead[0].ToString("X2")}, 0x{bytesRead[1].ToString("X2")}]";
         }
@@ -90,7 +88,7 @@ namespace USBHIDWinFormsApp
         {
             Debug.WriteLine("Input report received");
             Debug.WriteLine(e.Report.Data.ToArray());
-        }   
+        }
 
         private void registerForEvents()
         {
@@ -98,9 +96,26 @@ namespace USBHIDWinFormsApp
             {
                 Debug.WriteLine("Input report received");
                 var data = e.Report.Data.ToArray();
-                this.Invoke(new Action(() => inputReportEventCheckBox.Checked = (data[1] == 0x01))); 
-                Debug.WriteLine(String.Join(" ",(Array.ConvertAll(data,b => "0x"+b.ToString("X2")))));
+                this.Invoke(new Action(() => inputReportEventCheckBox.Checked = (data[1] == 0x01)));
+                Debug.WriteLine(String.Join(" ", (Array.ConvertAll(data, b => "0x" + b.ToString("X2")))));
             };
+        }
+
+        private async void sendOutputReport64Async(byte reportId, byte firstByte)
+        {
+            var outputReport = device.CreateOutputReport(reportId);
+            var data = new byte[65];
+            data[0] = reportId;
+            data[1] = firstByte;
+            outputReport.Data = data.AsBuffer();
+            Debug.WriteLine("Sending output report");
+            uint bytesWritten = await device.SendOutputReportAsync(outputReport);
+        }
+
+        private void sendOutputReportButton64_Click(object sender, EventArgs e)
+        {
+            toggle = (byte)~toggle;
+            sendOutputReport64Async(0x00, toggle);
         }
     }
 }
