@@ -98,6 +98,12 @@ namespace USBHIDWinFormsApp
                 var data = e.Report.Data.ToArray();
                 this.Invoke(new Action(() => inputReportEventCheckBox.Checked = (data[1] == 0x01)));
                 Debug.WriteLine(String.Join(" ", (Array.ConvertAll(data, b => "0x" + b.ToString("X2")))));
+
+                //change slider value based on input report
+                if (data.Length > 1)
+                {
+                    this.Invoke(new Action(() => trackBar1.Value = data[1]));
+                }
             };
         }
 

@@ -35,6 +35,8 @@
             inputReportTextBox = new TextBox();
             inputReportEventCheckBox = new CheckBox();
             button2 = new Button();
+            trackBar1 = new TrackBar();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // USBFound
@@ -105,9 +107,18 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += sendOutputReportButton64_Click;
             // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(191, 250);
+            trackBar1.Maximum = 255;
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(104, 45);
+            trackBar1.TabIndex = 5;
+            // 
             // Form1
             // 
             ClientSize = new Size(347, 307);
+            Controls.Add(trackBar1);
             Controls.Add(inputReportEventCheckBox);
             Controls.Add(inputReportTextBox);
             Controls.Add(button1);
@@ -117,6 +128,7 @@
             Controls.Add(USBFound);
             Name = "Form1";
             Text = "HID - Windows Forms";
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -130,5 +142,6 @@
         private TextBox inputReportTextBox;
         private CheckBox inputReportEventCheckBox;
         private Button button2;
+        private TrackBar trackBar1;
     }
 }
